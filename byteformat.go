@@ -1,5 +1,7 @@
 package main
 
+// NOTE: This code is written from a TDD perspective and is not yet complete.
+
 import (
   "fmt"
 )
