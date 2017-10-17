@@ -5,31 +5,26 @@ import (
 )
 
 func TestToBytes(t *testing.T) {
-  if ToBytes("500MB") != 500000000 {
-    t.Error("Could not convert 500MB")
+  var humanString string = "1 KB"
+  if ToBytes(humanString) != 1000 {
+    t.Errorf("Could not convert %s", humanString)
   }
-  if ToBytes("500MiB") != 524288000 {
-    t.Error("Could not convert 500MiB")
-  }
-  if ToBytes("1.21GiB") != 1299227607.04 {
-    t.Errorf("Could not convert 1.21GiB")
-  }
-  if ToBytes("1.21GB") != 1210000000 {
-    t.Errorf("Could not convert 1.21GB")
+  humanString = "1 KiB"
+  if ToBytes("1 KiB") != 1024 {
+    t.Errorf("Could not convert %s", humanString)
   }
 }
 
 func TestToUnit(t *testing.T) {
-  if ToUnit(1234, "KB") != 1.234 {
-    t.Errorf("Could not convert 1234 to KB")
+  var bytes uint64 = 1234
+  var unit string = "KB"
+  var expected float64 = 1.234
+  if ToUnit(bytes, unit) != expected {
+    t.Errorf("Could not convert %v to %s", bytes, unit)
   }
-  if ToUnit(1234, "KiB") != 1.204078 {
-    t.Errorf("Could not convert 1234 to KiB")
-  }
-  if ToUnit(567890, "MB") != 0.56789 {
-    t.Errorf("Could not convert 567890 to MB")
-  }
-  if ToUnit(567890, "MiB") != 0.541582108 {
-    t.Errorf("Could not convert 567890 to MiB")
+  unit = "KiB"
+  expected = 1.205078125
+  if ToUnit(bytes, unit) != expected {
+    t.Errorf("Could not convert %v to %s", bytes, unit)
   }
 }
